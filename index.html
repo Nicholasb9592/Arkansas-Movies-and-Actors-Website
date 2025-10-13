@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Nicholas Bryan</title>
+    <meta name="description" content="E-Commerce and Information Technology Lectures">
+    <meta name="keywords" content="E-Commerce, HTML, CSS, PHP ,JavaScript">
+    <meta name="author" content="Nicholas Bryan">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- See https://www.w3schools.com/howto/howto_js_responsive_navbar_dropdown.asp-->
+<style>
+body {margin:0;font-family:Arial}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #ffffff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.active {
+  background-color: #04a9a9;
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 17px;    
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.topnav a:hover, .dropdown:hover .dropbtn {
+  background-color: #024b4b;
+  color: white;
+}
+
+.dropdown-content a:hover {
+  background-color: #cdfefe;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child), .dropdown .dropbtn {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav.responsive .dropdown {float: none;}
+  .topnav.responsive .dropdown-content {position: relative;}
+  .topnav.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+
+
+body {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	/*background-color: #666;*/
+	}
+
+#container {
+	margin-right: 50px;
+	margin-left: 50px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+p {
+	margin-bottom: 20px;
+}
+
+p.shift {
+    margin-left: 30px;
+}
+
+.listmargin  {
+	margin-bottom: 20px;
+}	
+
+.img-style-1 {
+	float: left;
+	margin-right: 10px;
+    margin-bottom: 10px;
+	padding: 5px;
+	border: 1px solid #CCC;
+}	
+
+
+
+</style>
+</head>
+<body>
+<div id="container">
+    <h1>Portfolio of Nicholas Bryan</h1>
+    <div class="topnav" id="myTopnav">
+        <a class="tablinks" onclick="openTab(event, 'Home')" class="active" id="defaultOpen">Profile</a>
+        <a class="tablinks" onclick="openTab(event, 'Resume')">Resume</a>
+        <a class="tablinks" onclick="openTab(event, 'Skills')">Skills</a>
+        <a class="tablinks" onclick="openTab(event, 'Education')">Education</a>
+        <a class="tablinks" onclick="openTab(event, 'Accomplishments')">Accomplishments</a>
+        <a class="tablinks" onclick="openTab(event, 'CoverLetter')">Cover Letter</a>
+        <a class="tablinks" onclick="openTab(event, 'Contact')">Contact</a>
+        <div class="dropdown">
+            <button class="dropbtn">Work Examples 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a class="tablinks" onclick="openTab(event, 'Writing')">Writing Examples</a>
+                <a class="tablinks" onclick="openTab(event, 'WebProject')">Web Project</a>
+                <a class="tablinks" onclick="openTab(event, 'Database')">Database</a>
+                <a class="tablinks" onclick="openTab(event, 'Programming')">Programming</a>
+                <a class="tablinks" onclick="openTab(event, 'SoftSkills')">Soft Skills</a>
+                <a class="tablinks" onclick="openTab(event, 'Capstone')">Capstone</a>
+		<a class="tablinks" onclick="openTab(event, 'Art')">Art</a>
+            </div>
+        </div> 
+        <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+
+
+    <!-- Begin Home Section -->
+    <div id="Home" class="tabcontent">
+        <h2>Profile</h2>
+	 <p><img class="img-style-1" src="Assets/Images/Portfolio_Selfie.jpg" width="150" height="175">Hi my name is Nicholas Bryan. I am a senior at the University of Arkansas at Little Rock going for my Bachelor's degree in Information Science. I have job experience that taught me a couple of soft skills, which are communication, adaptablity, and dependability. I have experience in a couple of programing languages, which are HTML, Javascript, mySQL, and C++.</p>
+	<p>I am looking for an IT job to be a technican or specialist. I am looking for the job to be physically active than being behind a screen all day where I can help out others with computer or network issues and running cables around the building. Being able to organize and have good synergy is what I strive for in a job.</p>
+	    <p>I am eager to find a job within my degree of study, so I can get my career up and running.</p>
+    </div>
+
+    <!-- Begin Skills Section -->
+    <div id="Skills" class="tabcontent">
+        <h2>Skills</h2>
+	<ul><li>HTML</li>
+	<li>JavaScript</li>
+	<li>CSS</li>
+	<li>C++</li>
+	<li>MySQL</li></ul>
+    </div>
+
+    <!-- Begin Education Section -->
+    <div id="Education" class="tabcontent">
+        <h2>Education</h2>
+
+<p>Sheridan High School, Sheridan, AR</p>
+	    
+<ul><li>Family and Consumer Sciences</li>
+<li>JROTC</li>
+<li>Diploma</li></ul>
+
+<p>Pulaski Technical College, Little Rock, AR</p>
+	    
+<ul><li>Associate’s Degree in Liberal Arts & Science</li>
+<li>General Studies</li></ul>
+
+<p>University of Arkansas at Little Rock, Little Rock, AR</p>
+	    
+<ul><li>Senior going for Bachelor's Degree in Information Science</li></ul>
+ 
+    </div>
+
+    <!-- Begin Accomplishments Section -->
+    <div id="Accomplishments" class="tabcontent">
+        <h2>Accomplishments</h2>
+	    
+    </div>        
+  
+    <!-- Begin Skills Section -->
+    <div id="Resume" class="tabcontent">
+        <h2>Resume</h2>
+   <p>You can download my resume in full either in <a href="Assets/Resources/Resume.docx">Google Doc</a> or <a href="Assets/Resources/Resume.pdf">PDF</a> format.</p>
+
+<h2>Job Experience:</h2>
+
+<h3>Edward’s Food Giant (May 2021 to July 2024)</h3>
+	    
+<ul><li>Morning and Night Stocker - Stock shelves and keep items in rotation from old up front to new in the back. Unload shipments in the morning.</li>
+<li>Bagger - Bag customer's groceries and help them if need be.</li>
+<li>Cashier - Ring up customer's groceries and keep my station clean.</li>
+<li>Self-checkout - Help customers if they need any help using self-checkout and keep all stations clean.</li>
+<li>Produce - Stock, maintain, and cut fruits and vegetables for sell. Unload shipments, clean work area, get rid of and scan out bad product. Teach new employees and help them if need be.</li></ul>
+
+<h4>FedEx Grounds (December 2024 to present)</h4>
+<ul><li>Package Handler - Load packages into trailers including ICs which are usually heavy. Scan ICs to the right dock door.</li></ul>
+
+
+    </div>
+    <!-- Begin Coverletter-->
+    <div id="CoverLetter" class="tabcontent">
+        <h2>Letter of Introduction</h2>
+
+<p>Dear Potential Employer,</p>
+
+<p>I am interested in a position within your company. I think I would be a great fit for this position. I have job experience of 4 years, while trying to get my Major in Information Science. Right now, I am working at Fedex Grounds and attending at the University of Arkansas at Little Rock.  I am hardworking, adaptive, and reliable and I will be committed to getting the job done. I also have experience with a couple of programming languages, which include Javascript, html, and C++. I saw the company's job opening on linkedin.com. I am looking forward to hearing from you soon.</p>
+
+<p>Thank you for your time</p>
+
+<p>Sincerely,</p>
+
+<p>Nicholas Bryan</p>
+
+    </div>
+
+    <!--Begin Contact-->
+    <div id="Contact" class="tabcontent">
+      <h2>Contact Me</h2>
+
+<p>19311 M and M Lane</p>
+<p>Little Rock, AR 72206</p>
+<p>(501) 351-9391</p>
+<p>nbryan938@gmail.com</p>
+	    
+    </div>
+
+    <!-- Begin Writing Examples-->
+    <div id="Writing" class="tabcontent">
+        <h2>Writing Example 1</h2>
+	    <p>This Writing example is from a business class called Management Info Resources, in which UALR had a cyberattack and I was to help provide what to do to prevent this from happening again as an assignment for this class.</p>
+	    <a href="Assets/Resources/Assignment 1 Nicholas Bryan.pdf">Assignment 1</a>
+        <h2>Writing Example 2</h2>
+	    <p>This writing example was for a Legal Business Enviromnent class where you find a case from the U.S. and do a Case Brief on the case in detail for the project.</p>
+	    <a href="Assets/Resources/Case Brief NB.pdf">Case Brief</a>
+    </div>
+
+    <!-- Begin Web Examples -->
+    <div id="WebProject" class="tabcontent">
+        <h2>Web Project 1</h2>
+	<p> This is an assignment from Capstone 1 where you are suppose to recreate a webpage as close as possible and answer the questions.</p>
+	<a href="HTML-CSS-Review-Assignment/index.html" target="_blank">HTML-CSS-Review-Assignment</a>
+        <h2>Web Project 2</h2>
+	<p>This is homework from Web Client Applications where you create a simple interface for entering information about the user. Also, the last question is a simple game with pop-ups.</p>
+	<a href="IFSC3300HW11NB.html/index.html" target="_blank">IFSC3300HW11NB.html</a>
+    </div>
+
+    <!-- Begin Database Examples -->
+    <div id="Database" class="tabcontent">
+        <h2>Database Project 1</h2>
+	<p>This is an exam from Systems Develop Method where we had to show what rules would apply to the system design. Then show what it would look like with the keys included. </p>
+	<a href="Assets/Resources/System Development Method Exam 2.pdf">Exam 2</a>
+        <h2>Database Project 2</h2>
+	<p>This is an exam from Systems Develop Method where we had to create a use case diagram and a class diagram as well. w</p>
+	<a href="Assets/Resources/System Development Method Exam 3.pdf">Exam 3</a>
+    </div>
+
+    <!-- Begin Programming Examples -->
+    <div id="Programming" class="tabcontent">
+        <h2>Programming Project 1</h2>
+	<p>This is an assignment from Capstone 1 where you create a simple calculator using java.</p>
+	<a href="JavaScript-Calculator-Assignment/index.html" target="_blank">JavaScript-Calculator-Assignment</a>
+        <h2>Programming Project 2</h2>
+	<p>This is an assignment from Capstone 1 where you get an API key from polygon.io to get data on current currency cost compared to other currencies. You will select a currency you want converted to another currency with a start date and end date (it is finicky with the dates, so try 4/20/25 to 4/26/25).</p>
+	<a href="Currency-Value-History-Assignment/index.html" target="_blank">Currency-Value-History-Assignment</a>
+    </div>
+
+    <!-- Begin Soft Skills -->
+    <div id="SoftSkills" class="tabcontent">
+        <h2>Soft Skills Project 1</h2>
+	    <p>This is an assignment fromm Systems Develop Method where we created a case diagram with descriptions and then make a use case diagram with the given cases. </p>
+	    <a href="Assets/Resources/Case Diagram SDM NB.pdf">Case Diagram</a>
+        <h2>Soft Skills Project 2</h2>
+	    <p>This is an exam from Systems Develop Method with two different questions. The first one had us create a graph to show time for each activity until the project is done and answer the questions about the time for each activity. Next question was to create a diagram for a shipping company.</p>
+	    <a href="Assets/Resources/System Development Method Exam 1.pdf">Exam 1</a>
+    </div>
+
+    <!-- Begin Capstone Project -->
+    <div id="Capstone" class="tabcontent">
+        <h2>Capstone Project</h2>
+	<p>This is the project from Capstone 1. We had to create a charter from a fake interview where the person needs a website for their skin care treatment patients to see the UV ray forecast to help them keep track of how much UV rays they got per day.</p>
+	<a href="Assets/Resources/Project Charter NB.pdf">Project Charter</a> or <a href="Assets/Resources/Project Charter NB.docx">Project Charter download</a>
+	<p>This is part of the same project, but we had to give an analysis based on our charter and information from the interview.</p>
+	<a href="Assets/Resources/Project Analysis NB.pdf">Project Analysis</a> or <a href="Assets/Resources/Project Analysis NB.docx">Project Analysis download</a>
+	<p>This is the design part of the project where we had to give design details of the website to even see if it is possible to be made and how it would look.</p>
+	<a href="Assets/Resources/Project Design NB.pdf">Project Design</a> or <a href="Assets/Resources/Project Design NB.docx">Project Design download</a>
+    </div>
+
+    <div id="Art" class="tabcontent">
+        <h2>Art Example</h2>
+	<p>This art example was from Computer Applications in Art. We had to use a picture of a friend or family to make it black and gray and decrease the resolution. Then we colored over it with only three colors and their shades. </p>
+	<img class="img-style-1" src="Assets/Images/BryanN-projectB.jpg" width="350" height="400">
+    </div>
+</div>
+
+<script>
+/* Click the default tab so that the profile is displayed */
+document.getElementById("defaultOpen").click();
+
+function myFunction() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+
+function openTab(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+</body>
+</html>
