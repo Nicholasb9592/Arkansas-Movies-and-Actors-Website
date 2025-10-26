@@ -1,4 +1,4 @@
-const apiKey = "YOUR_TMDB_API_KEY";
+const apiKey = "";
 const apiBase = "https://api.themoviedb.org/3";
 
 async function getArkansasMovies() {
