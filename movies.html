@@ -1,1 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies Filmed in Arkansas</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Movies Filmed in Arkansas</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="movies.html">Movies</a>
+      <a href="actors.html">Actors</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
 
+  <section id="movie-list" class="movie-grid">
+    <!-- Movies will load here via API -->
+  </section>
+
+  <div id="movieModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div id="movieDetails"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Arkansas Film Project</p>
+  </footer>
+
+  <script src="js/movies.js"></script>
+</body>
+</html>
