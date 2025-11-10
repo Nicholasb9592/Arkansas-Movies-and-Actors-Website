@@ -1,4 +1,4 @@
-const apiKey = "YOUR_TMDB_API_KEY";
+const apiKey = "e36a7ff4d8c66d63173b15bb01e21258";
 const movieList = document.getElementById("movie-list");
 const modal = document.getElementById("movieModal");
 const modalContent = document.getElementById("movieDetails");
