@@ -4,8 +4,8 @@ const actorModal = document.getElementById("actorModal");
 const actorDetails = document.getElementById("actorDetails");
 const closeBtn = document.querySelector(".close");
 
-// Example list of Arkansas actors
-const arkansasActors = ["Billy Bob Thornton", "Mary Steenburgen", "Wes Bentley", "Joey Lauren Adams"];
+// list of Arkansas Actors
+const arkansasActors = ["Billy Bob Thornton", "Mary Steenburgen", "Wes Bentley", "Joey Lauren Adams, Johnny Cash"];
 
 async function getActorDetails(name) {
   const url = `https://api.themoviedb.org/3/search/person?api_key=${apiKey}&query=${encodeURIComponent(name)}`;
