@@ -5,7 +5,7 @@ const modalContent = document.getElementById("movieDetails");
 const closeBtn = document.querySelector(".close");
 
 // Example movies filmed in Arkansas
-const arkansasMovies = ["Mud", "Sling Blade", "True Grit", "Arkansas", "A Face in the Crowd"];
+const arkansasMovies = ["Mud", "Sling Blade", "True Grit", "Arkansas", "A Face in the Crowd", "Jackass Number Two", "", ""];
 
 async function getMovieDetails(title) {
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(title)}`;
