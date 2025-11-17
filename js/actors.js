@@ -5,7 +5,7 @@ const actorDetails = document.getElementById("actorDetails");
 const closeBtn = document.querySelector(".close");
 
 // list of Arkansas Actors
-const arkansasActors = ["Billy Bob Thornton", "Mary Steenburgen", "Wes Bentley", "Joey Lauren Adams, Johnny Cash"];
+const arkansasActors = ["Billy Bob Thornton", "Mary Steenburgen", "Brandon Keener", "Scott Reeves", "Johnny Cash"];
 
 async function getActorDetails(name) {
   const url = `https://api.themoviedb.org/3/search/person?api_key=${apiKey}&query=${encodeURIComponent(name)}`;
