@@ -26,27 +26,32 @@ nav a:hover {
 .modal {
   display: none;
   position: fixed;
-  z-index: 1000;
+  z-index: 2000;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  overflow-y: auto;
+  background-color: rgba(0,0,0,0.6);
   padding-top: 60px;
+  box-sizing: border-box;
 }
 
 .modal-content {
   background: #fff;
-  margin: auto;
-  padding: 20px;
-  width: 80%;
-  max-width: 900px;
+  margin: 0 auto;
+  padding: 18px;
+  width: 90%;
+  max-width: 920px;
   border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .close {
   float: right;
   font-size: 28px;
+  border: none;
+  background: none;
   cursor: pointer;
 }
 
@@ -54,24 +59,24 @@ nav a:hover {
   width: 180px;
   border-radius: 6px;
   float: left;
-  margin-right: 15px;
+  margin-right: 12px;
 }
 
-/* Grid Layout */
+/* grid */
 .movie-grid, .actor-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  gap: 18px;
+  padding: 18px;
 }
 
 .card {
   background: #fff;
   border-radius: 8px;
   padding: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-  text-align: center;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
   cursor: pointer;
+  text-align: center;
 }
 
 .card img {
