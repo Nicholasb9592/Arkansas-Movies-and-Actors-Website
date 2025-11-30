@@ -3,8 +3,12 @@ const arkansasMovies = [
   "Sling Blade",
   "True Grit",
   "Arkansas",
-  "A Face in the Crowd",
-  "The Quick and the Dead"
+  "The Quick and the Dead",
+  "End of the Line",
+  "Mindcage",
+  "The Ernest Green Story",
+  "Walk the Line",
+  "Jackass Number Two"
 ];
 
 const movieListEl = document.getElementById("movie-list");
