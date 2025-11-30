@@ -38,8 +38,8 @@ async function buildMovieCard(title) {
 function openMovieDetail(details) {
   const cast = details.credits?.cast?.slice(0, 8) || [];
   const posters = details.images?.posters?.slice(0, 6) || [];
-  const imdbUrl = details.imdb_id
-    ? `https://www.imdb.com/title/${details.imdb_id}`
+  const imdbUrl = details.tmdb_id
+    ? `https://www.themoviedb.org/title/${details.tmdb_id}`
     : "#";
 
   const html = `
@@ -51,7 +51,7 @@ function openMovieDetail(details) {
     <p><strong>Synopsis:</strong> ${details.overview}</p>
     <p><strong>Cast:</strong> ${cast.map(c => c.name).join(", ")}</p>
 
-    <p><a href="${imdbUrl}" target="_blank">View on IMDb</a></p>
+    <p><a href="${tmdbUrl}" target="_blank">View on TMDb</a></p>
 
     <h3>Posters</h3>
     <div style="display:flex; gap:8px; flex-wrap:wrap;">
