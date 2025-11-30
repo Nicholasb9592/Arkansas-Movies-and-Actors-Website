@@ -7,20 +7,26 @@ const arkansasActors = [
 
 const actorListEl = document.getElementById("actor-list");
 
-// Build actor card
+function safeSmallImg(src, alt = "") {
+  if (!src) return `<div style="width:100%;height:260px;background:#ddd;display:flex;align-items:center;justify-content:center;border-radius:6px;">No Image</div>`;
+  return `<img src="${src}" alt="${alt}" style="width:100%;height:260px;object-fit:cover;border-radius:6px;" onerror="this.onerror=null;this.src='images/placeholder.png'">`;
+}
+
 async function buildActorCard(name) {
   try {
     const found = await searchPersonRaw(name);
-    if (!found) return;
-
+    if (!found) {
+      console.warn("Actor not found:", name);
+      return;
+    }
     const details = await getPersonDetails(found.id);
+    const profileUrl = tmdbImage(details.profile_path, "w300");
 
     const card = document.createElement("div");
     card.className = "card actor-card";
-
     card.innerHTML = `
-      <img src="${tmdbImage(details.profile_path,'w300')}">
-      <h3>${details.name}</h3>
+      ${safeSmallImg(profileUrl, details.name)}
+      <h3>${details.name || ""}</h3>
       <p>${details.place_of_birth || ""}</p>
     `;
 
@@ -28,42 +34,49 @@ async function buildActorCard(name) {
     actorListEl.appendChild(card);
 
   } catch (err) {
-    console.error("Actor error:", err);
+    console.error("buildActorCard error:", err);
   }
 }
 
-// Open modal with actor info
 function openActorDetail(details) {
   const credits = details.combined_credits?.cast || [];
-  credits.sort((a,b) => (b.release_date || "").localeCompare(a.release_date || ""));
+  credits.sort((a,b) => ((b.release_date || b.first_air_date) || "").localeCompare((a.release_date || a.first_air_date) || ""));
+  const topCredits = credits.slice(0, 15);
 
-  const tmdbUrl = details.tmdb_id
-    ? `https://www.themoviedb.org/name/${details.tmdb_id}`
-    : "#";
+  const tmdbPersonUrl = `https://www.themoviedb.org/person/${details.id}`;
 
   const html = `
-    <h2>${details.name}</h2>
-    <img class="poster" src="${tmdbImage(details.profile_path,'w300')}">
+    <div style="display:flex;gap:16px;align-items:flex-start;">
+      <div style="flex:0 0 180px;">${safeSmallImg(tmdbImage(details.profile_path,'w300'), details.name)}</div>
+      <div style="flex:1;">
+        <h2 style="margin-top:0">${details.name || ""}</h2>
+        <p><strong>Born:</strong> ${details.birthday || "Unknown"} ${details.place_of_birth ? `in ${details.place_of_birth}` : ""}</p>
+        <p><strong>Known for:</strong> ${details.known_for_department || "N/A"}</p>
+        <p><strong>Biography:</strong> ${details.biography ? (details.biography.slice(0,800) + (details.biography.length>800? "…" : "")) : "No biography available."}</p>
+        <p><a href="${tmdbPersonUrl}" target="_blank" rel="noopener">View on TheMovieDB</a></p>
+      </div>
+    </div>
 
-    <p><strong>Born:</strong> ${details.birthday || ""} in ${details.place_of_birth || ""}</p>
-    <p><strong>Biography:</strong> ${details.biography?.slice(0, 700) || "No biography available."}...</p>
+    <hr/>
 
-    <p><a href="${tmdbUrl}" target="_blank">View on %TMDb</a></p>
-
-    <h3>Filmography</h3>
-    <ul>
-      ${credits.slice(0, 15).map(c => `
-        <li>${c.title || c.name} (${c.release_date?.slice(0,4) || ""})</li>
-      `).join("")}
-    </ul>
+    <div>
+      <h4>Selected Filmography</h4>
+      <ul>
+        ${topCredits.map(c => `<li>${(c.title||c.name)||"Unknown"} ${c.release_date ? `(${c.release_date.slice(0,4)})` : ""}</li>`).join("")}
+      </ul>
+    </div>
   `;
 
   openInfoModal(html);
 }
 
-// Initial load
-(async function initActors() {
-  for (const name of arkansasActors) {
-    buildActorCard(name);
+document.addEventListener("DOMContentLoaded", async () => {
+  if (!actorListEl) {
+    console.error("actor-list element not found in DOM.");
+    return;
   }
-})();
+  actorListEl.innerHTML = "";
+  for (const a of arkansasActors) {
+    await buildActorCard(a);
+  }
+});
