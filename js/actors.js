@@ -7,44 +7,72 @@ const closeBtn = document.querySelector(".close");
 // list of Arkansas Actors
 const arkansasActors = ["Billy Bob Thornton", "Mary Steenburgen", "Brandon Keener", "George Newbern", "Johnny Cash", "Josh Lucas", "Ne-Yo", "Daniel Davis"];
 
-async function getActorDetails(name) {
-  const url = `https://api.themoviedb.org/3/search/person?api_key=${apiKey}&query=${encodeURIComponent(name)}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  return data.results[0];
-}
+const actorListEl = document.getElementById("actor-list"); // ensure actors.html has <section id="actor-list" class="actor-grid"></section>
 
-async function displayActors() {
-  for (let name of arkansasActors) {
-    const actor = await getActorDetails(name);
-    if (!actor) continue;
-
-    const actorCard = document.createElement("div");
-    actorCard.classList.add("actor-card");
-    actorCard.innerHTML = `
-      <img src="https://image.tmdb.org/t/p/w200${actor.profile_path}" alt="${actor.name}">
-      <h3>${actor.name}</h3>
+async function buildActorCard(name) {
+  try {
+    const found = await searchPersonRaw(name);
+    if (!found) {
+      console.warn("Actor not found:", name);
+      return;
+    }
+    const details = await getPersonDetails(found.id); // combined_credits is already appended
+    const profile = details.profile_path;
+    const knownFor = (details.known_for_department || "") + (details.popularity ? ` • popularity ${Math.round(details.popularity)}` : "");
+    const card = document.createElement("div");
+    card.className = "card actor-card";
+    card.innerHTML = `
+      <img src="${tmdbImage(profile,'w300')}" alt="${details.name}">
+      <h3>${details.name}</h3>
+      <p>${details.place_of_birth || ""}</p>
     `;
-
-    actorCard.addEventListener("click", () => openActorModal(actor));
-    actorList.appendChild(actorCard);
+    card.addEventListener("click", () => openActorDetail(details));
+    actorListEl.appendChild(card);
+  } catch (err) {
+    console.error("Error building actor card for", name, err);
   }
 }
 
-function openActorModal(actor) {
-  actorDetails.innerHTML = `
-    <h2>${actor.name}</h2>
-    <p>${actor.known_for_department}</p>
-    <h4>Known For:</h4>
-    <ul>${actor.known_for.map(f => `<li>${f.title || f.name}</li>`).join("")}</ul>
-    <a href="https://www.imdb.com/name/${actor.imdb_id}" target="_blank">View on IMDb</a>
+function openActorDetail(details) {
+  // use combined_credits to display filmography, if available
+  const credits = (details.combined_credits && details.combined_credits.cast) ? details.combined_credits.cast : [];
+  // sort credits by release date descending
+  credits.sort((a,b)=> (b.release_date||b.first_air_date || "").localeCompare(a.release_date||a.first_air_date || ""));
+  const topMovies = credits.slice(0,12);
+
+  const imdbUrl = details.imdb_id ? `https://www.imdb.com/name/${details.imdb_id}` : "#";
+  const html = `
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+      <div style="flex:0 0 180px;">
+        <img class="poster" src="${tmdbImage(details.profile_path,'w300')}" alt="${details.name}">
+      </div>
+      <div class="modal-meta" style="flex:1;">
+        <h2>${details.name}</h2>
+        <p><strong>Born:</strong> ${details.birthday || 'Unknown'} ${details.place_of_birth ? `in ${details.place_of_birth}` : ''}</p>
+        <p><strong>Known for:</strong> ${details.known_for_department || 'N/A'}</p>
+        <p><strong>Biography:</strong> ${details.biography ? details.biography.slice(0,800) + (details.biography.length>800? "…" : "") : "No biography available."}</p>
+        <p><a href="${imdbUrl}" target="_blank" rel="noopener">View on IMDb</a></p>
+      </div>
+    </div>
+
+    <hr />
+
+    <div>
+      <h4>Selected Filmography</h4>
+      <ul>
+        ${topMovies.map(m => `<li>${(m.title || m.name) || 'Unknown'} ${m.release_date ? `(${m.release_date.slice(0,4)})` : ''}</li>`).join("")}
+      </ul>
+    </div>
   `;
-  actorModal.style.display = "block";
+
+  openInfoModal(html);
 }
 
-closeBtn.addEventListener("click", () => (actorModal.style.display = "none"));
-window.addEventListener("click", (e) => {
-  if (e.target === actorModal) actorModal.style.display = "none";
-});
-
-displayActors();
+// initialize list
+(async function initActors() {
+  if (!actorListEl) return console.error("actor-list element not found");
+  actorListEl.innerHTML = "";
+  for (const name of arkansasActors) {
+    buildActorCard(name);
+  }
+})();
