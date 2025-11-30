@@ -1,0 +1,71 @@
+const TMDB_API_KEY = "YOUR_TMDB_API_KEY";
+const TMDB_BASE = "https://api.themoviedb.org/3";
+
+/** helper: generic fetch wrapper with error handling */
+async function tmdbFetch(endpoint, params = {}) {
+  const url = new URL(`${TMDB_BASE}${endpoint}`);
+  url.searchParams.set("api_key", TMDB_API_KEY);
+  Object.entries(params).forEach(([k,v]) => { if (v !== undefined) url.searchParams.set(k, v); });
+  const res = await fetch(url.toString());
+  if (!res.ok) throw new Error(`TMDB fetch error ${res.status} ${res.statusText}`);
+  return res.json();
+}
+
+/** search movie by title (returns first match or null) */
+async function searchMovieRaw(title) {
+  const data = await tmdbFetch("/search/movie", { query: title });
+  return data.results && data.results.length ? data.results[0] : null;
+}
+
+/** movie full details (append images, videos if needed) */
+async function getMovieDetails(id) {
+  return tmdbFetch(`/movie/${id}`, { append_to_response: "images,credits,videos" });
+}
+
+/** movie credits (cast) if you want only credits separately */
+async function getMovieCredits(id) {
+  return tmdbFetch(`/movie/${id}/credits`);
+}
+
+/** search person/actor by name (first match) */
+async function searchPersonRaw(name) {
+  const data = await tmdbFetch("/search/person", { query: name });
+  return data.results && data.results.length ? data.results[0] : null;
+}
+
+/** full person details */
+async function getPersonDetails(id) {
+  return tmdbFetch(`/person/${id}`, { append_to_response: "images,combined_credits" });
+}
+
+/** helper to get full image URL for poster/profile */
+function tmdbImage(path, size = "w300") {
+  if (!path) return "";
+  return `https://image.tmdb.org/t/p/${size}${path}`;
+}
+
+/* ----------------- Modal helpers ----------------- */
+
+const infoModal = document.getElementById("infoModal");
+const modalInner = document.getElementById("modalInner");
+const modalCloseBtn = document.getElementById("modalClose");
+
+function openInfoModal(html) {
+  modalInner.innerHTML = html;
+  infoModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeInfoModal() {
+  infoModal.setAttribute("aria-hidden", "true");
+  modalInner.innerHTML = "";
+  document.body.style.overflow = "";
+}
+
+modalCloseBtn && modalCloseBtn.addEventListener("click", closeInfoModal);
+window.addEventListener("click", (e) => {
+  if (e.target === infoModal) closeInfoModal();
+});
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeInfoModal();
+});
