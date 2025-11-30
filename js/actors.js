@@ -37,8 +37,8 @@ function openActorDetail(details) {
   const credits = details.combined_credits?.cast || [];
   credits.sort((a,b) => (b.release_date || "").localeCompare(a.release_date || ""));
 
-  const imdbUrl = details.imdb_id
-    ? `https://www.imdb.com/name/${details.imdb_id}`
+  const tmdbUrl = details.tmdb_id
+    ? `https://www.themoviedb.org/name/${details.tmdb_id}`
     : "#";
 
   const html = `
@@ -48,7 +48,7 @@ function openActorDetail(details) {
     <p><strong>Born:</strong> ${details.birthday || ""} in ${details.place_of_birth || ""}</p>
     <p><strong>Biography:</strong> ${details.biography?.slice(0, 700) || "No biography available."}...</p>
 
-    <p><a href="${imdbUrl}" target="_blank">View on IMDb</a></p>
+    <p><a href="${tmdbUrl}" target="_blank">View on %TMDb</a></p>
 
     <h3>Filmography</h3>
     <ul>
