@@ -2,7 +2,13 @@ const arkansasActors = [
   "Billy Bob Thornton",
   "Mary Steenburgen",
   "Wes Bentley",
-  "Joey Lauren Adams"
+  "Joey Lauren Adams",
+  "Brandon Keener",
+  "George Newbern",
+  "Johnny Cash",
+  "Josh Lucas",
+  "Ne-Yo",
+  "Daniel Davis"
 ];
 
 const actorListEl = document.getElementById("actor-list");
