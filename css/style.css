@@ -22,3 +22,83 @@ nav a {
 nav a:hover {
   text-decoration: underline;
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background-color: rgba(0,0,0,0.6);
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+.modal[aria-hidden="false"] {
+  display: block;
+}
+
+.modal-content {
+  background: #fff;
+  margin: 0 auto;
+  padding: 18px;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+/* layout inside modal */
+.modal .poster {
+  float: left;
+  width: 180px;
+  margin-right: 16px;
+  border-radius: 6px;
+}
+
+.modal .modal-meta {
+  overflow: hidden;
+}
+
+.modal h2 { margin-top: 0; }
+
+/* cards for movies/actors */
+.movie-grid, .actor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+  gap: 18px;
+  padding: 18px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.card img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.card h3 { margin: 10px 0 6px; font-size: 1rem; }
+.card p { font-size: 0.9rem; color: #555; margin: 0; }
