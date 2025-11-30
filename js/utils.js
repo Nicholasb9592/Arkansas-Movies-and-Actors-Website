@@ -41,7 +41,7 @@ async function getPersonDetails(id) {
 
 // Image helper
 function tmdbImage(path, size = "w300") {
-  return path ? `https://image.tmdb.org/t/p/${size}${path}` : "";
+  return path ? `https://image.themoviedb.org/t/p/${size}${path}` : "";
 }
 
 // =====================
