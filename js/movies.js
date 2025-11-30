@@ -7,44 +7,73 @@ const closeBtn = document.querySelector(".close");
 // Example movies filmed in Arkansas
 const arkansasMovies = ["Mud", "Sling Blade", "True Grit", "End of the Line", "Mindcage", "The Ernest Green Story", "Walk the Line", "Jackass Number Two"];
 
-async function getMovieDetails(title) {
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(title)}`;
-  const res = await fetch(url);
-  const data = await res.json();
-  return data.results[0];
-}
+const movieListEl = document.getElementById("movie-list"); // ensure movies.html has <section id="movie-list" class="movie-grid"></section>
 
-async function displayMovies() {
-  for (let title of arkansasMovies) {
-    const movie = await getMovieDetails(title);
-    if (!movie) continue;
-
-    const movieCard = document.createElement("div");
-    movieCard.classList.add("movie-card");
-    movieCard.innerHTML = `
-      <img src="https://image.tmdb.org/t/p/w300${movie.poster_path}" alt="${movie.title}">
-      <h3>${movie.title}</h3>
-      <p>${movie.overview.substring(0, 100)}...</p>
+async function buildMovieCard(title) {
+  try {
+    const found = await searchMovieRaw(title);
+    if (!found) {
+      console.warn("Movie not found:", title);
+      return;
+    }
+    const details = await getMovieDetails(found.id);
+    const card = document.createElement("div");
+    card.className = "card movie-card";
+    card.innerHTML = `
+      <img src="${tmdbImage(details.poster_path, 'w342')}" alt="${details.title}">
+      <h3>${details.title} (${(details.release_date||"").slice(0,4)})</h3>
+      <p>${details.overview ? details.overview.slice(0,100) + "…" : ""}</p>
     `;
-
-    movieCard.addEventListener("click", () => openMovieModal(movie));
-    movieList.appendChild(movieCard);
+    card.addEventListener("click", () => openMovieDetail(details));
+    movieListEl.appendChild(card);
+  } catch (err) {
+    console.error("Error building card for", title, err);
   }
 }
 
-function openMovieModal(movie) {
-  modalContent.innerHTML = `
-    <h2>${movie.title}</h2>
-    <p><strong>Original Language:</strong> ${movie.original_language}</p>
-    <p>${movie.overview}</p>
-    <a href="https://www.imdb.com/title/${movie.imdb_id}" target="_blank">View on IMDb</a>
+async function openMovieDetail(details) {
+  // details should be the full movie object returned by getMovieDetails()
+  // try to get top cast from details.credits if appended
+  const cast = (details.credits && details.credits.cast) ? details.credits.cast.slice(0,8) : [];
+  const posters = (details.images && details.images.posters) ? details.images.posters.slice(0,6) : [];
+  const imdbUrl = details.imdb_id ? `https://www.imdb.com/title/${details.imdb_id}` : "#";
+
+  const html = `
+    <div style="display:flex; gap:16px; align-items:flex-start;">
+      <div style="flex:0 0 180px;">
+        <img class="poster" src="${tmdbImage(details.poster_path,'w342')}" alt="${details.title}">
+      </div>
+      <div class="modal-meta" style="flex:1;">
+        <h2>${details.title} ${details.release_date ? `(${details.release_date.slice(0,4)})` : ""}</h2>
+        <p><strong>Original language:</strong> ${details.original_language || "Unknown"}</p>
+        <p><strong>Runtime:</strong> ${details.runtime ? details.runtime + " min" : "Unknown"}</p>
+        <p><strong>Synopsis:</strong> ${details.overview || "No synopsis available."}</p>
+        <p><strong>Top Cast:</strong> ${cast.map(c => c.name).join(", ")}</p>
+        <p><a href="${imdbUrl}" target="_blank" rel="noopener">View on IMDb</a></p>
+      </div>
+    </div>
+
+    <hr />
+
+    <div>
+      <h4>Posters</h4>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        ${posters.map(p => `<img style="width:110px;height:160px;object-fit:cover;border-radius:4px" src="${tmdbImage(p.file_path,'w200')}" />`).join("")}
+      </div>
+    </div>
   `;
-  modal.style.display = "block";
+
+  openInfoModal(html);
 }
 
-closeBtn.addEventListener("click", () => (modal.style.display = "none"));
-window.addEventListener("click", (e) => {
-  if (e.target === modal) modal.style.display = "none";
-});
-
-displayMovies();
+// initialize list
+(async function initMovies() {
+  if (!movieListEl) return console.error("movie-list element not found");
+  movieListEl.innerHTML = "";
+  for (const title of arkansasMovies) {
+    // we don't await sequentially to speed up UI; but to limit concurrency you can await each
+    // for simplicity, build one-by-one
+    // await buildMovieCard(title);
+    buildMovieCard(title);
+  }
+})();
