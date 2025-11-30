@@ -9,62 +9,78 @@ const arkansasMovies = [
 
 const movieListEl = document.getElementById("movie-list");
 
-// Builds individual movie card
+function safeImgHtml(src, alt = "", width = "100%") {
+  if (!src) {
+    return `<div style="width:${width};height:260px;background:#ddd;display:flex;align-items:center;justify-content:center;border-radius:6px;">No Image</div>`;
+  }
+  return `<img src="${src}" alt="${alt}" style="width:${width};height:260px;object-fit:cover;border-radius:6px" onerror="this.onerror=null;this.src='images/placeholder.png'">`;
+}
+
 async function buildMovieCard(title) {
   try {
     const found = await searchMovieRaw(title);
-    if (!found) return;
-
+    if (!found) {
+      console.warn("Movie not found:", title);
+      return;
+    }
     const details = await getMovieDetails(found.id);
+    const posterUrl = tmdbImage(details.poster_path, "w342");
 
     const card = document.createElement("div");
     card.className = "card movie-card";
-
     card.innerHTML = `
-      <img src="${tmdbImage(details.poster_path, 'w342')}" alt="${details.title}">
-      <h3>${details.title}</h3>
-      <p>${details.overview?.slice(0, 100) || ""}...</p>
+      ${safeImgHtml(posterUrl, details.title)}
+      <h3>${details.title || ""} ${details.release_date ? `(${details.release_date.slice(0,4)})` : ""}</h3>
+      <p>${details.overview ? (details.overview.slice(0,110) + (details.overview.length>110 ? "…" : "")) : ""}</p>
     `;
 
     card.addEventListener("click", () => openMovieDetail(details));
     movieListEl.appendChild(card);
-
   } catch (err) {
-    console.error("Movie error:", err);
+    console.error("buildMovieCard error:", err);
   }
 }
 
-// Opens modal with details
 function openMovieDetail(details) {
   const cast = details.credits?.cast?.slice(0, 8) || [];
   const posters = details.images?.posters?.slice(0, 6) || [];
-  const imdbUrl = details.tmdb_id
-    ? `https://www.themoviedb.org/title/${details.tmdb_id}`
-    : "#";
+  const posterMain = tmdbImage(details.poster_path, "w342") || "";
+
+  const tmdbMovieUrl = `https://www.themoviedb.org/movie/${details.id}`;
 
   const html = `
-    <h2>${details.title} (${details.release_date?.slice(0,4) || ""})</h2>
-    <img class="poster" src="${tmdbImage(details.poster_path,'w342')}">
+    <div style="display:flex;gap:16px;align-items:flex-start;">
+      <div style="flex:0 0 180px;">${safeImgHtml(posterMain, details.title, "180px")}</div>
+      <div style="flex:1;">
+        <h2 style="margin-top:0">${details.title || ""} ${details.release_date ? `(${details.release_date.slice(0,4)})` : ""}</h2>
+        <p><strong>Language:</strong> ${details.original_language || "Unknown"}</p>
+        <p><strong>Runtime:</strong> ${details.runtime ? details.runtime + " min" : "Unknown"}</p>
+        <p><strong>Synopsis:</strong> ${details.overview || "No synopsis available."}</p>
+        <p><strong>Top Cast:</strong> ${cast.length ? cast.map(c => c.name).join(", ") : "N/A"}</p>
+        <p><a href="${tmdbMovieUrl}" target="_blank" rel="noopener">View on TheMovieDB</a></p>
+      </div>
+    </div>
 
-    <p><strong>Language:</strong> ${details.original_language}</p>
-    <p><strong>Runtime:</strong> ${details.runtime} min</p>
-    <p><strong>Synopsis:</strong> ${details.overview}</p>
-    <p><strong>Cast:</strong> ${cast.map(c => c.name).join(", ")}</p>
+    <hr/>
 
-    <p><a href="${tmdbUrl}" target="_blank">View on TMDb</a></p>
-
-    <h3>Posters</h3>
-    <div style="display:flex; gap:8px; flex-wrap:wrap;">
-      ${posters.map(p => `<img style="width:120px;" src="${tmdbImage(p.file_path,'w200')}">`).join("")}
+    <div>
+      <h4>Posters</h4>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        ${posters.map(p => `<img style="width:120px;height:160px;object-fit:cover;border-radius:4px" src="${tmdbImage(p.file_path,'w200')}" onerror="this.onerror=null;this.src='images/placeholder.png'">`).join("")}
+      </div>
     </div>
   `;
 
   openInfoModal(html);
 }
 
-// Initial load
-(async function initMovies() {
-  for (const title of arkansasMovies) {
-    buildMovieCard(title);
+document.addEventListener("DOMContentLoaded", async () => {
+  if (!movieListEl) {
+    console.error("movie-list element not found in DOM.");
+    return;
   }
-})();
+  movieListEl.innerHTML = "";
+  for (const t of arkansasMovies) {
+    await buildMovieCard(t);
+  }
+});
