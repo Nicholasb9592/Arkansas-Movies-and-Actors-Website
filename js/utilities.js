@@ -1,4 +1,4 @@
-const TMDB_API_KEY = "";
+const TMDB_API_KEY = "e36a7ff4d8c66d63173b15bb01e21258";
 const TMDB_BASE = "https://api.themoviedb.org/3";
 
 /** helper: generic fetch wrapper with error handling */
