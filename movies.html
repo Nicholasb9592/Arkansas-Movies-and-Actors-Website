@@ -15,38 +15,37 @@
   gtag('config', 'G-ZH9VQ39P3N');
 </script>
 </head>
+  
 <body>
-  <header>
-    <h1>Movies Filmed in Arkansas</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="movies.html">Movies</a>
-      <a href="actors.html">Actors</a>
-      <a href="about.html">About</a>
+
+  <nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="movies.html" class="active">Movies</a></li>
+            <li><a href="actors.html">Actors</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
     </nav>
-  </header>
 
-  <section id="movie-list" class="movie-grid">
-    <!-- Movies will load here via API -->
-  </section>
+    <header class="intro-section container">
+        <h2>Movies Filmed in Arkansas</h2>
+        <p>Explore a collection of films shot in or connected to the Natural State.</p>
+    </header>
 
-  <div id="movieModal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <div id="movieDetails"></div>
+    <section class="container">
+        <div id="movie-list" class="grid"></div>
+    </section>
+
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <button id="modalClose" class="close">&times;</button>
+            <div id="modalInner"></div>
+        </div>
     </div>
-  </div>
   
   <footer>
     <p>© 2025 Arkansas Film Project</p>
   </footer>
-
-  <div id="infoModal" class="modal" style="display:none;">
-  <div class="modal-content">
-    <button id="modalClose" class="close" aria-label="Close">&times;</button>
-    <div id="modalInner"></div>
-  </div>
-</div>
 
 <script src="js/utils.js"></script>
 <script src="js/movies.js"></script>
