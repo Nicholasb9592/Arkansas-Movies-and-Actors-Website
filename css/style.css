@@ -11,7 +11,6 @@ img {
   display: block;
 }
 
-/* Centered container */
 .container {
   width: 90%;
   max-width: 1100px;
@@ -50,7 +49,7 @@ img {
 
 
 .hero {
-  height: 320px;
+  height: 200px;
   background: url('../images/arkansas-banner.jpg') center/cover no-repeat;
   display: flex;
   align-items: center;
@@ -59,7 +58,7 @@ img {
 
 .hero-text {
   background: rgba(0,0,0,0.55);
-  padding: 20px 40px;
+  padding: 10px 30px;
   border-radius: 8px;
   color: white;
   text-align: center;
