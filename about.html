@@ -16,34 +16,61 @@
 </script>
 </head>
 <body>
-  <header>
-    <h1>About the Arkansas Movies & Actors Project</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="movies.html">Movies</a>
-      <a href="actors.html">Actors</a>
-      <a href="about.html">About</a>
+
+<nav class="navbar">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="actors.html">Actors</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+        </ul>
     </nav>
-  </header>
 
-  <section class="about-section">
-    <h2>Our Mission</h2>
-    <p>
-      This website celebrates Arkansas’s contributions to film and the talented actors from our state.  
-      Using data from TMDB and the Encyclopedia of Arkansas, we highlight productions filmed here and the people who brought them to life.
-    </p>
+    <section class="about-section">
+        <h2>About This Website</h2>
 
-    <h3>Technologies Used</h3>
-    <ul>
-      <li>HTML, CSS, JavaScript</li>
-      <li>TMDB API for live movie and actor data</li>
-      <li>Google Analytics for site tracking</li>
-      <li>GitHub Pages for hosting</li>
-    </ul>
-  </section>
+        <p>
+            The purpose of this website is to showcase the rich film heritage of 
+            Arkansas. Many well-known movies have been filmed in Arkansas, and 
+            many successful actors call the Natural State home.
+        </p>
 
+        <p>
+            This website was developed using:
+        </p>
+
+        <ul>
+            <li>HTML, CSS, and JavaScript</li>
+            <li>The TMDB API for movie and actor data</li>
+            <li>Encyclopedia of Arkansas for Arkansas-specific research</li>
+            <li>Google Analytics to analyze visitor usage</li>
+            <li>GitHub Pages for hosting</li>
+        </ul>
+
+        <p>
+            This project is intended for audiences aged 20–40 who are interested in 
+            film, culture, and Arkansas history.
+        </p>
+
+        <p>
+            All movie posters, actor images, and filmographies are sourced 
+            dynamically using the TMDB API.
+        </p>
+    </section>
+
+    <!-- Modal (kept for consistency but unused on this page) -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <button id="modalClose" class="close">&times;</button>
+            <div id="modalInner"></div>
+        </div>
+    </div>
+  
   <footer>
     <p>© 2025 Arkansas Film Project</p>
   </footer>
+
+<script src="js/utils.js"></script>
+  
 </body>
 </html>
