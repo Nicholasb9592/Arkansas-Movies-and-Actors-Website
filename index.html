@@ -17,7 +17,7 @@
 </head>
 <body>
 
-    <nav class="navbar">
+     <nav class="navbar">
         <ul>
             <li><a href="index.html" class="active">Home</a></li>
             <li><a href="movies.html">Movies</a></li>
@@ -29,57 +29,41 @@
     <header class="hero">
         <div class="hero-text">
             <h1>Arkansas Film Heritage</h1>
-            <p>Discover the movies filmed in Arkansas and the talented actors who call it home.</p>
+            <p>Explore the movies filmed in Arkansas and the actors who call it home.</p>
         </div>
     </header>
 
-    <section class="intro-section">
-        <h2>Welcome to Arkansas Movies & Actors</h2>
+    <section class="intro-section container">
+        <h2>Welcome</h2>
         <p>
-            Arkansas has shaped American cinema with iconic films such as 
-            <strong>Mud</strong>, <strong>Sling Blade</strong>, and 
-            <strong>True Grit</strong>. The Natural State is also home to 
-            celebrated actors like <strong>Billy Bob Thornton</strong> and 
-            <strong>Mary Steenburgen</strong>.  
-        </p>
-        <p>
-            Explore the rich movie history of Arkansas through detailed film profiles, 
-            actor biographies, and behind-the-scenes details powered by the TMDB API.
+            Arkansas has shaped American cinema with iconic productions like 
+            <strong>Mud</strong>, <strong>Sling Blade</strong>, and <strong>True Grit</strong>.
+            It’s also home to talented actors such as <strong>Billy Bob Thornton</strong>
+            and <strong>Mary Steenburgen</strong>.
         </p>
     </section>
 
-    <section class="featured-container">
-
+    <section class="featured-container container">
         <div class="featured-card">
-            <h3>Featured Arkansas Movie</h3>
-            <div id="featured-movie" class="featured-content">
-                <p>Loading…</p>
-            </div>
+            <h3>Featured Movie</h3>
+            <div id="featured-movie">Loading…</div>
         </div>
 
         <div class="featured-card">
-            <h3>Featured Arkansas Actor</h3>
-            <div id="featured-actor" class="featured-content">
-                <p>Loading…</p>
-            </div>
+            <h3>Featured Actor</h3>
+            <div id="featured-actor">Loading…</div>
         </div>
     </section>
 
-    <section class="nav-cards">
-        <div class="nav-card">
-            <a href="movies.html">Browse Movies</a>
-        </div>
-        <div class="nav-card">
-            <a href="actors.html">Meet the Actors</a>
-        </div>
-        <div class="nav-card">
-            <a href="about.html">About the Project</a>
-        </div>
+    <section class="nav-cards container">
+        <div class="nav-card"><a href="movies.html">Movies</a></div>
+        <div class="nav-card"><a href="actors.html">Actors</a></div>
+        <div class="nav-card"><a href="about.html">About</a></div>
     </section>
 
     <div id="infoModal" class="modal">
         <div class="modal-content">
-            <button id="modalClose" class="close" aria-label="Close">&times;</button>
+            <button id="modalClose" class="close">&times;</button>
             <div id="modalInner"></div>
         </div>
     </div>
