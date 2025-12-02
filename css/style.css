@@ -77,6 +77,7 @@ img {
 
 .intro-section h2 {
   font-size: 32px;
+  color: white;
   margin-bottom: 15px;
 }
 
@@ -167,7 +168,7 @@ img {
   max-width: 900px;
   margin: 50px auto;
   border-radius: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.55);
 }
 
 
