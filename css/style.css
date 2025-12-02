@@ -180,6 +180,11 @@ img {
   border-radius: 6px;
 }
 
+.about-section p,
+.about-section li,
+.about-section h2 {
+    color: white;
+}
 
 .modal {
   display: none;
