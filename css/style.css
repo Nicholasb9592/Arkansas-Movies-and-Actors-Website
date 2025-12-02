@@ -69,6 +69,14 @@ img {
   font-size: 42px;
 }
 
+.intro-section {
+  background: rgba(0,0,0,0.55);
+  color: white;
+  text-align: center;
+  padding: 16px 0;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
 
 .intro-section {
   padding: 10px 0;
