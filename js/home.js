@@ -1,9 +1,8 @@
 const arkansasMovies = [
-  "Mud",
+  "Walk the Line",
   "Sling Blade",
   "True Grit",
   "Arkansas",
-  "A Face in the Crowd",
   "The Quick and the Dead"
 ];
 
@@ -11,7 +10,8 @@ const arkansasActors = [
   "Billy Bob Thornton",
   "Mary Steenburgen",
   "Wes Bentley",
-  "Joey Lauren Adams"
+  "Johnny Cash",
+  "George Newbern"
 ];
 
 function pickRandom(list) {
