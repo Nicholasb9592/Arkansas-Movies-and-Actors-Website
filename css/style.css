@@ -194,6 +194,10 @@ img {
   border-radius: 10px;
 }
 
+.footer {
+  color: white;
+}
+
 .close {
   font-size: 32px;
   float: right;
