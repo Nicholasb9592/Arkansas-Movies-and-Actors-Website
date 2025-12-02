@@ -207,8 +207,12 @@ img {
   border-radius: 10px;
 }
 
-.footer p {
-  color: white;
+.site-footer {
+    color: white;
+    text-align: right;
+    padding: 20px 0;
+    margin-top: 50px;
+    font-size: 16px;
 }
 
 .close {
