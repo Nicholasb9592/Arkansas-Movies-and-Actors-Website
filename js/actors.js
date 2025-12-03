@@ -15,7 +15,7 @@ const arkansasActors = [
   "Sheryl Underwood",
   "Dick Powell",
   "Jerry Van Dyke",
-  "Ben Murphy",
+  "William Ragsdale",
   "Bill Clinton",
   "Kimberly Foster",
   "Daniel Davis"
