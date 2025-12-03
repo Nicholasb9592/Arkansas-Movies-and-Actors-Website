@@ -30,14 +30,14 @@ async function loadFeaturedMovie() {
     const poster = tmdbImage(details.poster_path, "w342");
 
     box.innerHTML = `
-      <div class="featured-box">
-        <img src="${poster}" alt="${details.title}">
-        <h4>${details.title}</h4>
-        <p>${details.overview.slice(0, 120)}...</p>
-      </div>
-    `;
+  <div class="featured-box clickable">
+      <img src="${poster}" alt="${details.title}">
+      <h4>${details.title}</h4>
+      <p>${details.overview.slice(0, 120)}...</p>
+  </div>
+`;
 
-    box.onclick = () => openMovieDetail(details);
+   box.querySelector(".clickable").onclick = () => openMovieDetail(details);
 
   } catch (err) {
     console.error(err);
@@ -56,15 +56,15 @@ async function loadFeaturedActor() {
 
     const img = tmdbImage(details.profile_path);
 
-    box.innerHTML = `
-      <div class="featured-box">
-        <img src="${img}" alt="${details.name}">
-        <h4>${details.name}</h4>
-        <p>${details.biography ? details.biography.slice(0, 120) + "..." : "Biography unavailable."}</p>
+   box.innerHTML = `
+      <div class="featured-box clickable">
+          <img src="${img}" alt="${details.name}">
+          <h4>${details.name}</h4>
+          <p>${details.biography ? details.biography.slice(0, 120) + "..." : "Biography unavailable."}</p>
       </div>
     `;
 
-    box.onclick = () => openActorDetail(details);
+    box.querySelector(".clickable").onclick = () => openActorDetail(details);
 
   } catch (err) {
     console.error(err);
