@@ -8,6 +8,11 @@ const arkansasActors = [
   "Johnny Cash",
   "Josh Lucas",
   "Ne-Yo",
+  "Bronco Billy Anderson",
+  "Alan Ladd",
+  "Rodger Bumpass",
+  "Clark Duke",
+  "Sheryl Underwood",
   "Daniel Davis"
 ];
 
