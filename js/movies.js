@@ -13,6 +13,11 @@ const arkansasMovies = [
   "A Face in the Crowd",
   "Boggy Creek Monster",
   "Smoke in the Wind",
+  "The Town That Dreaded Sundown",
+  "Stone Cold",
+  "Terror at Black Falls",
+  "Great Balls of Fire!",
+  "Pursuit",
   "Jackass Number Two"
 ];
 
