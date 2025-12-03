@@ -8,6 +8,11 @@ const arkansasMovies = [
   "Mindcage",
   "The Ernest Green Story",
   "Walk the Line",
+  "Greater",
+  "A Soldier's Story",
+  "A Face in the Crowd",
+  "Boggy Creek Monster",
+  "Smoke in the Wind",
   "Jackass Number Two"
 ];
 
