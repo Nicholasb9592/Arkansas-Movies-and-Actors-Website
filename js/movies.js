@@ -45,39 +45,6 @@ async function buildMovieCard(title) {
   }
 }
 
-function openMovieDetail(details) {
-  const cast = details.credits?.cast?.slice(0, 8) || [];
-  const posters = details.images?.posters?.slice(0, 6) || [];
-  const posterMain = tmdbImage(details.poster_path, "w342") || "";
-
-  const tmdbMovieUrl = `https://www.themoviedb.org/movie/${details.id}`;
-
-  const html = `
-    <div style="display:flex;gap:16px;align-items:flex-start;">
-      <div style="flex:0 0 180px;">${safeImgHtml(posterMain, details.title, "180px")}</div>
-      <div style="flex:1;">
-        <h2 style="margin-top:0">${details.title || ""} ${details.release_date ? `(${details.release_date.slice(0,4)})` : ""}</h2>
-        <p><strong>Language:</strong> ${details.original_language || "Unknown"}</p>
-        <p><strong>Runtime:</strong> ${details.runtime ? details.runtime + " min" : "Unknown"}</p>
-        <p><strong>Synopsis:</strong> ${details.overview || "No synopsis available."}</p>
-        <p><strong>Top Cast:</strong> ${cast.length ? cast.map(c => c.name).join(", ") : "N/A"}</p>
-        <p><a href="${tmdbMovieUrl}" target="_blank" rel="noopener">View on TheMovieDB</a></p>
-      </div>
-    </div>
-
-    <hr/>
-
-    <div>
-      <h4>Posters</h4>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        ${posters.map(p => `<img style="width:120px;height:160px;object-fit:cover;border-radius:4px" src="${tmdbImage(p.file_path,'w200')}" onerror="this.onerror=null;this.src='images/placeholder.png'">`).join("")}
-      </div>
-    </div>
-  `;
-
-  openInfoModal(html);
-}
-
 document.addEventListener("DOMContentLoaded", async () => {
   if (!movieListEl) {
     console.error("movie-list element not found in DOM.");
