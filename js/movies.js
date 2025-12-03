@@ -17,7 +17,7 @@ const arkansasMovies = [
   "Stone Cold",
   "Terror at Black Falls",
   "Great Balls of Fire!",
-  "Pursuit",
+  "White Lightning",
   "Jackass Number Two"
 ];
 
