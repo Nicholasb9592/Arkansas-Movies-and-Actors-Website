@@ -13,6 +13,11 @@ const arkansasActors = [
   "Rodger Bumpass",
   "Clark Duke",
   "Sheryl Underwood",
+  "Dick Powell",
+  "Jerry Van Dyke",
+  "Ben Murphy",
+  "Bill Clinton",
+  "Kimberly Foster",
   "Daniel Davis"
 ];
 
