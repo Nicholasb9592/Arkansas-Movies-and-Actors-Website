@@ -18,32 +18,38 @@ function openMovieDetail(movie) {
     modal.style.display = "block";
 }
 
-function openActorDetail(actor) {
-    const modal = document.getElementById("detail-modal");
-    const modalContent = document.getElementById("detail-content");
+function openActorDetail(details) {
+  const credits = details.combined_credits?.cast || [];
+  credits.sort((a,b) => ((b.release_date || b.first_air_date) || "").localeCompare((a.release_date || a.first_air_date) || ""));
+  const topCredits = credits.slice(0, 15);
 
-    const img = tmdbImage(actor.profile_path);
+  const tmdbPersonUrl = `https://www.themoviedb.org/person/${details.id}`;
 
-    let knownForList = "";
-    if (actor.combined_credits && actor.combined_credits.cast) {
-        knownForList = actor.combined_credits.cast
-            .slice(0, 8)
-            .map(movie => `<li>${movie.title || movie.name}</li>`)
-            .join("");
-    }
+  const html = `
+    <div style="display:flex;gap:16px;align-items:flex-start;">
+      <div style="flex:0 0 180px;">${safeSmallImg(tmdbImage(details.profile_path,'w300'), details.name)}</div>
+      <div style="flex:1;">
+        <h2 style="margin-top:0">${details.name || ""}</h2>
+        <p><strong>Born:</strong> ${details.birthday || "Unknown"} ${details.place_of_birth ? `in ${details.place_of_birth}` : ""}</p>
+        <p><strong>Known for:</strong> ${details.known_for_department || "N/A"}</p>
+        <p><strong>Biography:</strong> ${details.biography ? (details.biography.slice(0,800) + (details.biography.length>800? "…" : "")) : "No biography available."}</p>
+        <p><a href="${tmdbPersonUrl}" target="_blank" rel="noopener">View on TheMovieDB</a></p>
+      </div>
+    </div>
 
-    modalContent.innerHTML = `
-        <h2>${actor.name}</h2>
-        <img src="${img}" class="popup-img">
-        <p><strong>Birthday:</strong> ${actor.birthday || "Unknown"}</p>
-        <p><strong>Biography:</strong> ${actor.biography || "No biography available."}</p>
-        <h3>Known For:</h3>
-        <ul>${knownForList}</ul>
-        <p><a href="https://www.themoviedb.org/person/${actor.id}" target="_blank">View on TMDB</a></p>
-    `;
+    <hr/>
 
-    modal.style.display = "block";
+    <div>
+      <h4>Selected Filmography</h4>
+      <ul>
+        ${topCredits.map(c => `<li>${(c.title||c.name)||"Unknown"} ${c.release_date ? `(${c.release_date.slice(0,4)})` : ""}</li>`).join("")}
+      </ul>
+    </div>
+  `;
+
+  openInfoModal(html);
 }
+
 
 function closeModal() {
     document.getElementById("detail-modal").style.display = "none";
